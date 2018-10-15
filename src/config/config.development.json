@@ -1,0 +1,28 @@
+{
+  "sequelize": {
+    "enabled": true,
+    "name": "example",
+    "host": "example.com",
+    "port": 3306,
+    "user": "example",
+    "pass": "example",
+    "options": {
+      "description": "YOUR_SEQUELIZE_OPTIONS"
+    }
+  },
+  "jwt": {
+    "enabled": true,
+    "secret": "",
+    "algorithm": "HS256",
+    "expiresIn": "48h"
+  },
+  "aws": {
+    "enabled": false,
+    "credentials": {
+      "accessKeyId": "",
+      "secretAccessKey": ""
+    },
+    "region": ""
+  },
+  "routesPath": "api/v1.0"
+}

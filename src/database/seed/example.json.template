@@ -1,0 +1,11 @@
+[{
+  "model": "example",
+  "data": {
+    "someField": "Something"
+  }
+}, {
+  "model": "example",
+  "data": {
+    "someField": "Something else"
+  }
+}] 

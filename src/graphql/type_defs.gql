@@ -1,0 +1,28 @@
+directive @isAuthenticated on FIELD_DEFINITION
+
+type User {
+  uuid: ID!
+  email: String!
+  firstName: String
+  lastName: String
+  refreshToken: String!
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Query {
+  user: User @isAuthenticated
+}
+
+type Mutation {
+  signup(email: String!, password: String!): AuthPayload
+  login(email: String!, password: String!): AuthPayload
+  updateUser(
+    firstName: String
+    lastName: String
+  ): User @isAuthenticated
+  deleteUser: User @isAuthenticated
+}
