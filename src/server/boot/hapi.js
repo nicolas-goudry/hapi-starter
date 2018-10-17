@@ -46,8 +46,8 @@ const bootHapi = async (hapi, config) => {
   debug('Expose app stuff')
 
   // Expose plugins and config
-  hapi.app.aws = hapi.plugins['aws'] && hapi.plugins['aws'].aws
-  hapi.app.jwt = hapi.plugins['jwt'] && hapi.plugins['jwt'].jwt
+  hapi.app.jwt = hapi.plugins['jwt']
+  hapi.app.mailer = hapi.plugins['mailer']
   hapi.app.config = config
 }
 
