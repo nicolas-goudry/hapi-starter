@@ -1,19 +1,11 @@
 
 import configJson from 'config.json'
-import createDebugger from 'debug'
 import Hapi from 'hapi'
 import ora from 'ora'
 import path from 'path'
 
+import routes from '/routes'
 import boot from './boot'
-
-const debug = createDebugger('hapi-starter:server')
-
-const print = (text, success = false) => {
-  if (process.env.NODE_ENV === 'development') {
-
-  }
-}
 
 // Load environment config file
 const config = configJson(
@@ -47,7 +39,7 @@ const start = async () => {
   await boot.plugins(hapi, config)
 
   pluginSpinner.succeed('Plugins loaded!')
-  
+
   const dbSpinner = ora('Initialize database').start()
 
   // Initialize database
@@ -58,7 +50,7 @@ const start = async () => {
   const hapiSpinner = ora('Setup Hapi.js').start()
 
   // Initialize Hapi.js
-  await boot.hapi(hapi, config)
+  await boot.hapi(hapi, config, routes)
 
   hapiSpinner.succeed('Hapi.js setup!')
 

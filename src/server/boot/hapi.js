@@ -9,7 +9,7 @@ const debug = createDebugger('hapi-starter:hapi')
  * @param {Object} config Environment configuration
  * @returns {Promise} Hapi.js start Promise
  */
-const bootHapi = async (hapi, config) => {
+const bootHapi = async (hapi, config, routes) => {
   debug('Load strategy')
 
   // Load JWT strategy as default
@@ -41,7 +41,7 @@ const bootHapi = async (hapi, config) => {
   debug('Load routes')
 
   // Register routes
-  hapi.route(config.routesPath)
+  hapi.route(routes)
 
   debug('Expose app stuff')
 
