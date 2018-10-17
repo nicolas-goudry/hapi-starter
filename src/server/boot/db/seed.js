@@ -1,4 +1,5 @@
 import createDebugger from 'debug'
+import fs from 'fs'
 import path from 'path'
 import { loadFile } from 'sequelize-fixtures'
 
@@ -28,11 +29,27 @@ ALTER updated_at SET DEFAULT NOW();
 
   debug('Query generated')
   debug(defaultNow)
+  debug('Check for fixtures file')
+
+  const seedPath = path.resolve(__dirname, '../../../database/seed')
+  const hasJsonFiles = fs.readdirSync(seedPath).reduce((acc, val) => {
+    if (!acc) {
+      acc = /.*\.json$/.test(val)
+    }
+
+    return acc
+  }, false)
+
+  if (hasJsonFiles) {
+    debug('Fixtures file found')
+  } else {
+    debug('No fixtures file found')
+  }
 
   // Execute query and load fixtures files
   return Promise.all([
     db.sequelize.query(defaultNow),
-    loadFile(path.resolve(__dirname, '../../../database/seed/*.json'), db.models)
+    hasJsonFiles && loadFile(path.resolve(seedPath, '*.json'), db.models)
   ])
 }
 
