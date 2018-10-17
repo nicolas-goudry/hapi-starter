@@ -37,7 +37,8 @@ const plugin = (opt) => ({
           paranoid: true,
           timestamps: true,
           underscored: true
-        }
+        },
+        logging: process.env.NODE_ENV === 'development'
       }
     ),
     sync: true,
