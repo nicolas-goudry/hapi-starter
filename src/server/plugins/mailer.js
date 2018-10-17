@@ -5,8 +5,6 @@ import template from 'lodash.template'
 import nodemailer from 'nodemailer'
 import path from 'path'
 
-const emailsPath = path.resolve(__dirname, '../../emails')
-
 const plugin = {
   name: 'mailer',
   register: function (server, options) {
@@ -38,7 +36,7 @@ const plugin = {
       opts.from = options.sender
 
       if (opts.template) {
-        const tPath = path.join(emailsPath, opts.template)
+        const tPath = path.resolve(__dirname, '../../emails', opts.template)
 
         opts.html = template(fs.readFileSync(`${tPath}.html`, 'utf8'))(opts.data)
         opts.text = template(fs.readFileSync(`${tPath}.txt`, 'utf8'))(opts.data)
