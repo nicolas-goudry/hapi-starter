@@ -32,7 +32,7 @@ const bootApollo = async (hapi) => {
     tracing: process.env.NODE_ENV !== 'production'
   })
 
-  debug('Setup Apollo server')
+  debug('Initialize Apollo server')
 
   await apollo.applyMiddleware({
     app: hapi
