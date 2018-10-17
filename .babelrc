@@ -2,12 +2,12 @@
   "presets": [
     ["env", {
       "targets": {
-        "node": 6
-      },
-      "forceAllTransforms": true
+        "node": 8
+      }
     }]
   ],
   "plugins": [
+    "transform-object-rest-spread",
     ["inline-import", {
       "extensions": [".gql", ".sql"]
     }],
