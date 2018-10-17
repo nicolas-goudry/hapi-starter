@@ -1,7 +1,7 @@
 {
   "name": "hapi-starter",
   "version": "1.0.0",
-  "description": "HAPI + GraphQL + Sequelize",
+  "description": "Hapi.js <3 GraphQL (w/ Apollo, Sequelize, Nodemailer...)",
   "main": "build/index.js",
   "scripts": {
     "lint": "make source-lint"
