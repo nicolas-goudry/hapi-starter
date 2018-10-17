@@ -1,28 +1,37 @@
 {
   "sequelize": {
     "enabled": true,
-    "name": "example",
-    "host": "example.com",
+    "name": "TODO",
+    "host": "TODO",
     "port": 3306,
-    "user": "example",
-    "pass": "example",
+    "user": "TODO",
+    "pass": "TODO",
     "options": {
       "description": "YOUR_SEQUELIZE_OPTIONS"
     }
   },
   "jwt": {
     "enabled": true,
-    "secret": "",
+    "secret": "TODO",
     "algorithm": "HS256",
     "expiresIn": "48h"
   },
-  "aws": {
-    "enabled": false,
-    "credentials": {
-      "accessKeyId": "",
-      "secretAccessKey": ""
+  "mailer": {
+    "enabled": true,
+    "ses": {
+      "enabled": true,
+      "accessKeyId": "TODO",
+      "secretAccessKey": "TODO",
+      "region": "TODO"
     },
-    "region": ""
-  },
-  "routesPath": "api/v1.0"
+    "smtp": {
+      "enabled": false,
+      "service": "TODO",
+      "auth": {
+          "user": "TODO",
+          "pass": "TODO"
+      }
+    },
+    "sender": "TODO <TODO@TODO.TODO>"
+  }
 }
