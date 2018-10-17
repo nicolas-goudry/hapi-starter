@@ -1,11 +1,13 @@
 
 import configJson from 'config.json'
+import createDebugger from 'debug'
 import Hapi from 'hapi'
-import ora from 'ora'
 import path from 'path'
 
 import routes from '/routes'
 import boot from './boot'
+
+const debug = createDebugger('hapi-starter:server')
 
 // Load environment config file
 const config = configJson(
@@ -17,7 +19,7 @@ const config = configJson(
  * @returns {Object} Hapi.js server
  */
 const start = async () => {
-  const mainSpinner = ora('Starting server').start()
+  debug('Load Hapi.js')
 
   // Load Hapi.js
   const hapi = new Hapi.Server({
@@ -33,38 +35,30 @@ const start = async () => {
     }
   })
 
-  const pluginSpinner = ora('Load plugins').start()
+  debug('Load plugins')
 
   // Load Hapi.js plugins
   await boot.plugins(hapi, config)
 
-  pluginSpinner.succeed('Plugins loaded!')
-
-  const dbSpinner = ora('Initialize database').start()
+  debug('Initialize database')
 
   // Initialize database
   await boot.database(hapi.plugins['hapi-sequelizejs'][config.sequelize.name])
 
-  dbSpinner.succeed('Database initialized!')
-
-  const hapiSpinner = ora('Setup Hapi.js').start()
+  debug('Setup Hapi.js')
 
   // Initialize Hapi.js
   await boot.hapi(hapi, config, routes)
 
-  hapiSpinner.succeed('Hapi.js setup!')
-
-  const apolloSpinner = ora('Setup Apollo server').start()
+  debug('Setup Apollo server')
 
   // Initialize Apollo Server
   await boot.apollo(hapi)
 
-  apolloSpinner.succeed('Apollo server setup!')
+  debug('Start server')
 
   // Start Hapi.js
   await hapi.start()
-
-  mainSpinner.succeed('Server started!')
 
   return hapi
 }

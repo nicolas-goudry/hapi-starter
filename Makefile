@@ -81,25 +81,6 @@ endif
 
 
 
-# Display PM2 logs
-pm2-logs:
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 logs
-
-# Display PM2 status
-pm2-status:
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 status pm2.config.json
-
-# Remove PM2 apps and cache
-pm2-rm:
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 delete all || true
-	rm -rf ./.pm2
-
-# Update local PM2
-pm2-update:
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 update
-
-
-
 # Remove dependencies before installing them again (also purge lockfile)
 fresh-install:
 	rm -rf {node_modules,package-lock.json}
@@ -116,18 +97,4 @@ test:
 # Start app
 start:
 	make source
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 start pm2.config.json
-
-# Stop app
-stop:
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 stop pm2.config.json
-
-# Restart app
-restart:
-	PM2_HOME=".pm2" ./node_modules/.bin/pm2 restart pm2.config.json
-
-# Reload app
-reload:
-	make stop
-	make pm2-rm || true
-	make start
+	node build/src
