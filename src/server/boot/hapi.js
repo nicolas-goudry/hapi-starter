@@ -49,6 +49,7 @@ const bootHapi = async (hapi, config, routes) => {
   hapi.app.jwt = hapi.plugins['jwt']
   hapi.app.mailer = hapi.plugins['mailer']
   hapi.app.config = config
+  hapi.app.log = debug
 }
 
 export default bootHapi
