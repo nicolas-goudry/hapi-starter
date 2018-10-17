@@ -1,11 +1,11 @@
 {
   "sequelize": {
     "enabled": true,
-    "name": "TODO",
-    "host": "TODO",
+    "name": "hapi_starter",
+    "host": "localhost",
     "port": 3306,
-    "user": "TODO",
-    "pass": "TODO",
+    "user": "root",
+    "pass": "",
     "options": {
       "description": "YOUR_SEQUELIZE_OPTIONS"
     }
