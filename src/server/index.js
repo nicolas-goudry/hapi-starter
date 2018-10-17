@@ -21,7 +21,7 @@ const start = async () => {
 
   // Load Hapi.js
   const hapi = new Hapi.Server({
-    port: process.env.HAPI_PORT || 3000,
+    port: config.port || 3000,
     routes: {
       cors: true
     },
@@ -43,7 +43,7 @@ const start = async () => {
   const dbSpinner = ora('Initialize database').start()
 
   // Initialize database
-  await boot.database(hapi.plugins['hapi-sequelizejs'][config.db.name])
+  await boot.database(hapi.plugins['hapi-sequelizejs'][config.sequelize.name])
 
   dbSpinner.succeed('Database initialized!')
 

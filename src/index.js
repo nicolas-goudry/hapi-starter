@@ -7,6 +7,6 @@ global.Promise = Aigle
 initServer()
   .then((server) => {
     server.app.log(`Server started at ${server.info.uri}`)
-    server.app.log(`Connected to ${process.env.DB_NAME} database at ${process.env.DB_HOST}:${process.env.DB_PORT}`)
+    server.app.log(`Connected to ${server.app.config.sequelize.name} database at ${server.app.config.sequelize.host}:${server.app.config.sequelize.port}`)
   })
   .catch(console.error)
