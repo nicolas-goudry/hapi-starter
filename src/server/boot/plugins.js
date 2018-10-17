@@ -24,7 +24,7 @@ const loadPlugins = async (hapi, config) => {
       debug('Setup plugin', configKeys[i])
 
       // Load plugin file and remove enabled key from plugin final options
-      const plugin = require(path.resolve(__dirname, '../plugins', configKeys[i]))
+      const plugin = require(path.resolve(__dirname, '../plugins', configKeys[i])).default
       const options = omit(config[configKeys[i]], 'enabled')
 
       // Add plugin to array
