@@ -15,6 +15,7 @@ const plugin = (opt) => ({
       opt.name,
       opt.user,
       opt.pass, {
+        logging: process.env.NODE_ENV === 'development',
         dialect: 'mysql',
         ...opt.options,
         dialectOptions: {
@@ -37,8 +38,7 @@ const plugin = (opt) => ({
           paranoid: true,
           timestamps: true,
           underscored: true
-        },
-        logging: process.env.NODE_ENV === 'development'
+        }
       }
     ),
     sync: true,
