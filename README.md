@@ -1,7 +1,7 @@
 [standard:img]: https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square
 [standard:url]: http://standardjs.com
 
-# hapi-starter — Hapi.js <3 GraphQL (w/ Apollo, Sequelize, Nodemailer...) &middot; [![Standard - JavaScript Style Guide][standard:img]][standard:url]
+# hapi-starter &middot; [![Standard - JavaScript Style Guide][standard:img]][standard:url]
 
 ## Prerequisites
 
