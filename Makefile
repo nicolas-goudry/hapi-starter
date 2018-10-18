@@ -31,7 +31,7 @@ source-copy-files:
 	mkdir -p ${BUILD_FOLDER}/${SOURCE_FOLDER}/config
 	mkdir -p ${BUILD_FOLDER}/${SOURCE_FOLDER}/database/seed
 	cp ${SOURCE_FOLDER}/config/*.json ${BUILD_FOLDER}/${SOURCE_FOLDER}/config || true
-	cp ${SOURCE_FOLDER}/database/seed/*.json ${BUILD_FOLDER}/${SOURCE_FOLDER}/database/seed || true
+	cp ${SOURCE_FOLDER}/database/seed/* ${BUILD_FOLDER}/${SOURCE_FOLDER}/database/seed || true
 
 # Execute all source targets
 source:
