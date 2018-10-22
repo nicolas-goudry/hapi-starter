@@ -20,12 +20,12 @@ const loadPlugins = async (hapi, config) => {
 
   for (let i = 0; i < configKeys.length; i++) {
     // Only treat config object if enabled key is present and true
-    if (!config[configKeys[i]].disabled) {
+    if (config[configKeys[i]].plugin) {
       debug('Setup plugin', configKeys[i])
 
       // Load plugin file and remove enabled key from plugin final options
       const plugin = require(path.resolve(__dirname, '../plugins', configKeys[i])).default
-      const options = omit(config[configKeys[i]], 'enabled')
+      const options = omit(config[configKeys[i]], 'plugin')
 
       // Add plugin to array
       if (typeof plugin === 'function') {

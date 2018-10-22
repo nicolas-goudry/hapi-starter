@@ -1,5 +1,6 @@
 {
   "sequelize": {
+    "plugin": true,
     "name": "hapi_starter",
     "host": "localhost",
     "port": 3306,
@@ -10,12 +11,13 @@
     }
   },
   "jwt": {
+    "plugin": true,
     "secret": "TODO",
     "algorithm": "HS256",
     "expiresIn": "48h"
   },
   "mailer": {
-    "disabled": false,
+    "plugin": true,
     "ses": {
       "enabled": true,
       "accessKeyId": "TODO",
