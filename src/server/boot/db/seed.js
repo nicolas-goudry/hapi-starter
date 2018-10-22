@@ -41,7 +41,7 @@ ALTER updated_at SET DEFAULT NOW();
     acc.push(fs.readFileSync(path.resolve(seedPath, file)))
 
     return acc
-  }, []).join('\n')
+  }, [])
 
   // Check into seed directory for JSON files
   const hasJsonFiles = seedFiles.filter((file) => /.*\.json$/.test(file)).length > 0
@@ -55,7 +55,7 @@ ALTER updated_at SET DEFAULT NOW();
   // Execute query and load fixtures files
   return Promise.all([
     db.sequelize.query(defaultNow),
-    db.sequelize.query(sqlQueries),
+    sqlQueries.length && db.sequelize.query(sqlQueries.join('\n')),
     hasJsonFiles && loadFile(path.resolve(seedPath, '*.json'), db.models)
   ])
 }
