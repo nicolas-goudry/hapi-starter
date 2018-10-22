@@ -1,5 +1,6 @@
 import Boom from 'boom'
 import createDebugger from 'debug'
+import omit from 'lodash.omit'
 
 const debug = createDebugger('hapi-starter:hapi')
 
@@ -50,6 +51,13 @@ const bootHapi = async (hapi, config, routes) => {
   hapi.app.mailer = hapi.plugins['mailer']
   hapi.app.config = config
   hapi.app.log = debug
+
+  // Expose config keys to env
+  Object.keys(config).forEach((key) => {
+    if (config[key].env) {
+      process.env[key] = omit(config[key], 'env')
+    }
+  })
 }
 
 export default bootHapi
