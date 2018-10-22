@@ -20,9 +20,11 @@ const seedDatabase = async (db) => {
   let defaultNow = ''
 
   for (let i = 0; i < modelNames.length; i++) {
-    defaultNow += `ALTER TABLE ${modelNames[i]}
+    const tableName = db.models[modelNames[i]].getTableName()
+
+    defaultNow += `ALTER TABLE ${tableName}
 ALTER created_at SET DEFAULT NOW();
-ALTER TABLE ${modelNames[i]}
+ALTER TABLE ${tableName}
 ALTER updated_at SET DEFAULT NOW();
 `
   }
