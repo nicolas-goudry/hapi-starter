@@ -8,7 +8,7 @@ class IsAuthDirective extends SchemaDirectiveVisitor {
     const resolver = field.resolve
 
     field.resolve = async (root, args, ctx) => {
-      const { auth: { isAuthenticated, token }, server: { app: { jwt } } } = ctx.request
+      const { auth: { isAuthenticated, token }, server: { app: { config, jwt } } } = ctx.request
 
       if (!isAuthenticated) {
         debug('Authentication missing')
@@ -20,7 +20,7 @@ class IsAuthDirective extends SchemaDirectiveVisitor {
         debug('Checking token against authenticated user')
 
         try {
-          const verified = (await jwt.verify(token, process.env.JWT_SECRET)).id === ctx.user.id
+          const verified = (await jwt.verify(token, config.jwt.secret)).id === ctx.user.id
 
           if (!verified) {
             debug('Token doesn’t match authenticated user')
