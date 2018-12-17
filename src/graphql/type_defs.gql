@@ -16,7 +16,9 @@ type AuthPayload {
 }
 
 type Query {
-  user: User @isAuthenticated
+  me: User! @isAuthenticated
+  user(id: ID!): User! @isAuthenticated @isAdministrator
+  users: [User!] @isAuthenticated @isAdministrator
 }
 
 type Mutation {
