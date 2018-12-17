@@ -2,7 +2,9 @@ import { User } from 'api'
 
 const resolvers = {
   Query: {
-    user: (root, args, context, info) => User.get(context, args)
+    me: (root, args, context) => User.get(context, args),
+    user: (root, args, context, info) => User.get(context, args),
+    users: (root, args, context) => User.getAll(context, args)
   },
   Mutation: {
     signup: (root, args, context, info) => User.signup(context, args),
