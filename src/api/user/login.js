@@ -11,7 +11,11 @@ const compare = Aigle.promisify(bcrypt.compare)
 const login = async (ctx, { email, password }) => {
   debug('Login of user', email)
 
-  const user = await get(ctx, { search: email })
+  let user = await ctx.db.models.user.findOne({
+    where: {
+      email
+    }
+  })
 
   if (!user.isActive) {
     debug('User is not active')
@@ -39,7 +43,7 @@ const login = async (ctx, { email, password }) => {
 
   return {
     token: await ctx.request.server.app.jwt.sign({ id: user.id, scope: user.scope }),
-    user
+    user: await get(ctx, { id: user.uuid })
   }
 }
 

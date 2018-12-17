@@ -9,11 +9,7 @@ const update = async (ctx, args) => {
   debug('Update authenticated user', ctx.user.id)
   debug(JSON.stringify(omit(args, 'password'), null, 2))
 
-  const user = await get(ctx)
-
-  debug('Search for user profile (create it if it doesn’t exists')
-
-  await user.update(args)
+  await ctx.user.update(args)
 
   debug('Return updated user')
 
