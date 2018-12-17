@@ -1,4 +1,5 @@
 directive @isAuthenticated on FIELD_DEFINITION
+directive @isAdministrator on FIELD_DEFINITION
 
 type User {
   uuid: ID!

@@ -47,8 +47,41 @@ class IsAuthDirective extends SchemaDirectiveVisitor {
   }
 }
 
+const makeScopeDirective = (scope) => class IsScopeDirective extends SchemaDirectiveVisitor {
+  visitFieldDefinition (field) {
+    const resolver = field.resolve
+
+    field.resolve = async (root, args, ctx) => {
+      if (!ctx.request.auth.isAuthenticated) {
+        debug('isAdmin: Authentication missing')
+
+        throw new AuthenticationError('You must authenticate')
+      }
+
+      if (!ctx.user) {
+        debug('isAdmin: No user in context')
+
+        throw new AuthenticationError('Invalid user')
+      }
+
+      if (ctx.user.scope === scope) {
+        debug('isAdmin: Scope valid')
+
+        return resolver(root, args, ctx)
+      }
+
+      debug('isAdmin: Invalid or missing scope')
+      debug(JSON.stringify(ctx.user, null, 2))
+
+      throw new AuthenticationError('Invalid or missing scope')
+    }
+  }
+}
+
 const schemaDirectives = {
-  isAuthenticated: IsAuthDirective
+  isAuthenticated: IsAuthDirective,
+  isAdministrator: makeScopeDirective('admin'),
+  isUser: makeScopeDirective('user')
 }
 
 export default schemaDirectives
