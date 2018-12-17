@@ -1,4 +1,5 @@
 export { default as get } from './get'
+export { default as getAll } from './get_all'
 export { default as login } from './login'
 export { default as remove } from './remove'
 export { default as signup } from './signup'
