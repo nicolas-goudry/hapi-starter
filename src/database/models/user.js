@@ -53,6 +53,13 @@ module.exports = (sequelize, DataTypes) => sequelize.define('user', {
     field: 'is_active',
     defaultValue: false,
     type: DataTypes.BOOLEAN
+  },
+  scope: {
+    allowNull: false,
+    comment: 'scope of the user account',
+    defaultValue: 'user',
+    type: DataTypes.ENUM('admin', 'companion', 'user'),
+    unique: 'unique_user_by_scope'
   }
 }, {
   sequelize,

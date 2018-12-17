@@ -5,6 +5,7 @@ type User {
   email: String!
   firstName: String
   lastName: String
+  scope: String!
   refreshToken: String!
 }
 
