@@ -19,16 +19,27 @@ const bootApollo = async (hapi) => {
     typeDefs,
     resolvers,
     schemaDirectives,
-    context: ({ request }) => ({
-      request,
-      user: request.auth && request.auth.credentials && request.auth.credentials.id ? request.auth.credentials : {}
-    }),
-    playground: {
+    context: async ({ request }) => {
+      const db = request.getDb()
+      let user
+
+      if (request.auth && request.auth.credentials && request.auth.credentials.id) {
+        user = await db.models.user.findByPk(request.auth.credentials.id)
+      }
+
+      return {
+        db,
+        request,
+        user
+      }
+    },
+    playground: process.env.NODE_ENV !== 'production' ? {
       settings: {
         'editor.theme': 'dark',
         'editor.cursorShape': 'underline'
       }
-    },
+    } : false,
+    introspection: process.env.NODE_ENV !== 'production',
     tracing: process.env.NODE_ENV !== 'production'
   })
 
