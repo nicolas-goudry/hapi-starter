@@ -22,11 +22,7 @@ const seedDatabase = async (db) => {
   for (let i = 0; i < modelNames.length; i++) {
     const tableName = db.models[modelNames[i]].getTableName()
 
-    defaultNow += `ALTER TABLE ${tableName}
-ALTER created_at SET DEFAULT NOW();
-ALTER TABLE ${tableName}
-ALTER updated_at SET DEFAULT NOW();
-`
+    defaultNow += `ALTER TABLE ${tableName} MODIFY COLUMN created_at DATETIME NOT NULL DEFAULT NOW();ALTER TABLE ${tableName} MODIFY COLUMN updated_at DATETIME NOT NULL DEFAULT NOW();`
   }
 
   debug('Query generated')
