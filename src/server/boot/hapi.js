@@ -55,7 +55,7 @@ const bootHapi = async (hapi, config, routes) => {
   // Expose config keys to env
   Object.keys(config).forEach((key) => {
     if (config[key].env) {
-      process.env[key] = omit(config[key], 'env')
+      process[key] = omit(config[key], 'env')
     }
   })
 }

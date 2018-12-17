@@ -1,6 +1,5 @@
 import createDebugger from 'debug'
 import jwtAuth from 'hapi-auth-jwt2'
-import omit from 'lodash.omit'
 import path from 'path'
 
 const debug = createDebugger('hapi-starter:plugins')
@@ -19,23 +18,20 @@ const loadPlugins = async (hapi, config) => {
   const plugins = []
 
   for (let i = 0; i < configKeys.length; i++) {
-    // Only treat config object if enabled key is present and true
-    if (config[configKeys[i]].plugin) {
-      debug('Setup plugin', configKeys[i])
+    debug('Setup plugin', configKeys[i])
 
-      // Load plugin file and remove enabled key from plugin final options
-      const plugin = require(path.resolve(__dirname, '../plugins', configKeys[i])).default
-      const options = omit(config[configKeys[i]], 'plugin')
+    // Load plugin file
+    const plugin = require(path.resolve(__dirname, '../plugins', configKeys[i])).default
+    const options = config[configKeys[i]]
 
-      // Add plugin to array
-      if (typeof plugin === 'function') {
-        plugins.push(plugin(options))
-      } else {
-        plugins.push({
-          plugin,
-          options
-        })
-      }
+    // Add plugin to array
+    if (typeof plugin === 'function') {
+      plugins.push(plugin(options))
+    } else {
+      plugins.push({
+        plugin,
+        options
+      })
     }
   }
 

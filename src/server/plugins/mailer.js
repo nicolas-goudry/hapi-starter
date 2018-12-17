@@ -1,6 +1,5 @@
 import AWS from 'aws-sdk'
 import fs from 'fs'
-import omit from 'lodash.omit'
 import template from 'lodash.template'
 import nodemailer from 'nodemailer'
 import path from 'path'
@@ -8,10 +7,9 @@ import path from 'path'
 const plugin = {
   name: 'mailer',
   register: function (server, options) {
-    const transportOptions = (options.smtp.enabled && omit(options.smtp, 'enabled')) ||
-      (options.ses.enabled && {
-        SES: new AWS.SES(omit(options.ses, 'enabled'))
-      })
+    const transportOptions = options.smtp || {
+      SES: new AWS.SES(options.ses)
+    }
     const mailer = {
       transport: nodemailer.createTransport(transportOptions)
     }
