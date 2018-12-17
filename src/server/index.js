@@ -1,5 +1,3 @@
-
-import configJson from 'config.json'
 import createDebugger from 'debug'
 import Hapi from 'hapi'
 import path from 'path'
@@ -10,9 +8,9 @@ import boot from './boot'
 const debug = createDebugger('hapi-starter:server')
 
 // Load environment config file
-const config = configJson(
-  path.resolve(__dirname, '../config/config.json')
-)
+const config = require(
+  path.resolve(__dirname, '../config', `config${process.env.NODE_ENV ? `.${process.env.NODE_ENV.toLowerCase()}` : ''}.js`)
+).default
 
 /**
  * This function starts the server
@@ -23,7 +21,7 @@ const start = async () => {
 
   // Load Hapi.js
   const hapi = new Hapi.Server({
-    port: config.port || 3000,
+    port: process.env.PORT || 3000,
     routes: {
       cors: true
     },

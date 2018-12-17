@@ -17,7 +17,6 @@
     "aws-sdk": "2.334.0",
     "bcryptjs": "2.4.3",
     "boom": "7.2.0",
-    "config.json": "0.0.4",
     "debug": "4.1.0",
     "graphql": "0.13.2",
     "hapi": "17.6.0",

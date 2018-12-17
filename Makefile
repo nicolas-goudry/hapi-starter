@@ -28,9 +28,7 @@ source-build:
 # Copy JSON fixtures files and package.json
 source-copy-files:
 	cp package.json ${BUILD_FOLDER}
-	mkdir -p ${BUILD_FOLDER}/${SOURCE_FOLDER}/config
 	mkdir -p ${BUILD_FOLDER}/${SOURCE_FOLDER}/database/seed
-	cp ${SOURCE_FOLDER}/config/*.json ${BUILD_FOLDER}/${SOURCE_FOLDER}/config || true
 	cp ${SOURCE_FOLDER}/database/seed/* ${BUILD_FOLDER}/${SOURCE_FOLDER}/database/seed || true
 
 # Execute all source targets
