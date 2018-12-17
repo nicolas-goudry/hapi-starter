@@ -71,11 +71,11 @@ db-load:
 
 # If database container found, start it, else load it
 db:
-ifeq (docker ps -af name=${PROJECT_NAME}-db --format "{{.Names}}", ${PROJECT_NAME}-db)
-	make db-start
-else
-	make db-load
-endif
+	if [ ${PROJECT_NAME}-db = `docker ps -af name=${PROJECT_NAME}-db --format "{{.Names}}"` ]; then \
+		make db-start; \
+	else \
+		make db-load; \
+	fi
 
 
 
