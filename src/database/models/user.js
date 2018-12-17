@@ -60,6 +60,17 @@ module.exports = (sequelize, DataTypes) => sequelize.define('user', {
     defaultValue: 'user',
     type: DataTypes.ENUM('admin', 'companion', 'user'),
     unique: 'unique_user_by_scope'
+  },
+  createdAt: {
+    defaultValue: sequelize.fn('now'),
+    field: 'created_at',
+    type: DataTypes.DATE
+  },
+  updatedAt: {
+    defaultValue: sequelize.fn('now'),
+    field: 'updated_at',
+    onUpdate: 'SET DEFAULT',
+    type: DataTypes.DATE
   }
 }, {
   sequelize,
